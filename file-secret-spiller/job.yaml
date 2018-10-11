@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: secret-file-spiller
+spec:
+  template:
+    spec:
+      containers:
+      - name: secret-file-spiller
+        image: dougfish1/spill-file
+        volumeMounts:
+        - name: dougs-secret
+          mountPath: "/secret"
+          readOnly: true
+      volumes:
+      - name: dougs-secret
+        secret:
+          secretName: dougs-secrets
+          items:
+          - key: dougsecret3
+            path: the-secret
+      restartPolicy: Never
+  backoffLimit: 2
