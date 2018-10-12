@@ -6,8 +6,10 @@ I've created 3 secrets for the purpose of the demo:
 1) dougsecret1
 2) dougsecret2
 3) dougsecret3
+
 This is the most fake part of the example, because I put these secret into the repo. `Secrets Should Not Be In The Code Repo`. Our current thought is that secret value would be entered into TFS/VSTS and then during the deploy they would get read out and apply via `kubectl create secret`. 
 
+```
     kubectl get secret dougs-secrets -o json
     {
         "apiVersion": "v1",
@@ -27,7 +29,7 @@ This is the most fake part of the example, because I put these secret into the r
         },
     "type": "Opaque"
     }
-
+```
 
 Note that this is showing obfuscated, not encrypted secrets. cluster-admins and other people with secret read authority in your namespace can read this data. It's pretty trivial to extract that into the actual value. The example code read-secret-locally.sh does just that.
 
